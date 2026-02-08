@@ -1,0 +1,250 @@
+{
+  "project_info": {
+    "name": "AI-Based Spoofing Detection System",
+    "version": "1.0.0",
+    "created_date": "2026-02-06T10:03:55.865327",
+    "author": "AI/ML Security Engineer",
+    "description": "Comprehensive spoofing detection using multiple ML/DL models"
+  },
+  "dataset_info": {
+    "total_records": 100000,
+    "features": 45,
+    "feature_names": [
+      "packet_size",
+      "ttl",
+      "packets_per_minute",
+      "bytes_per_minute",
+      "connection_duration",
+      "inter_arrival_time",
+      "unique_destinations_1min",
+      "unique_destinations_5min",
+      "packet_size_mean",
+      "packet_size_std",
+      "packet_size_min",
+      "packet_size_max",
+      "ttl_variation",
+      "protocol_tcp_ratio",
+      "protocol_udp_ratio",
+      "protocol_icmp_ratio",
+      "port_diversity",
+      "hour_of_day",
+      "day_of_week",
+      "is_business_hours",
+      "is_weekend",
+      "geo_inconsistency",
+      "port_scanning_indicator",
+      "rapid_ip_change",
+      "packet_rate",
+      "byte_rate",
+      "avg_packet_size",
+      "conn_density",
+      "burst_indicator",
+      "ttl_low",
+      "ttl_high",
+      "traffic_intensity",
+      "protocol_encoded",
+      "device_type_encoded",
+      "packet_byte_ratio",
+      "connection_intensity",
+      "dest_diversity_rate",
+      "risk_score",
+      "behavioral_anomaly_score",
+      "packets_per_minute_log",
+      "bytes_per_minute_log",
+      "hour_sin",
+      "hour_cos",
+      "day_sin",
+      "day_cos"
+    ],
+    "train_size": 70000,
+    "val_size": 15000,
+    "test_size": 15000,
+    "attack_ratio": 0.15,
+    "attack_types": {
+      "normal": 85000,
+      "ip_spoofing": 4500,
+      "mac_spoofing": 3750,
+      "arp_spoofing": 3000,
+      "dns_spoofing": 2250,
+      "ddos": 1500
+    }
+  },
+  "models": {
+    "behavioral_lstm": {
+      "file": "behavioral_lstm.h5",
+      "type": "LSTM Neural Network",
+      "architecture": "Bidirectional LSTM (64 units)",
+      "input_shape": [
+        10,
+        45
+      ],
+      "metrics": {
+        "accuracy": 0.8501667778519013,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.4991855332965518
+      },
+      "hyperparameters": {
+        "lstm_units": 64,
+        "dropout_rate": 0.3,
+        "learning_rate": 0.001,
+        "batch_size": 128,
+        "sequence_length": 10
+      }
+    },
+    "anomaly_autoencoder": {
+      "file": "anomaly_autoencoder.h5",
+      "type": "Autoencoder Neural Network",
+      "architecture": "Dense Autoencoder (encoding_dim=32)",
+      "threshold": 0.03987509421156089,
+      "metrics": {
+        "accuracy": 0.9518,
+        "f1": 0.8615738081562321
+      }
+    },
+    "isolation_forest": {
+      "file": "isolation_forest.pkl",
+      "type": "Isolation Forest",
+      "architecture": "100 estimators",
+      "contamination": 0.15,
+      "metrics": {
+        "accuracy": 0.9354,
+        "f1": 0.7848101265822784
+      }
+    },
+    "threat_predictor": {
+      "file": "threat_predictor.h5",
+      "type": "LSTM Neural Network",
+      "architecture": "LSTM Sequence Predictor",
+      "threshold": 0.7,
+      "metrics": {
+        "accuracy": 0.8501667778519013,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.5062117999831185
+      }
+    },
+    "policy_dqn": {
+      "file": "policy_dqn.h5",
+      "type": "Deep Q-Network",
+      "architecture": "Dense DQN ([128, 64, 32])",
+      "action_space": 4,
+      "metrics": {
+        "accuracy": 0.178,
+        "f1": 0.28021015761821366
+      }
+    },
+    "correlation_engine": {
+      "file": "correlation_engine.pkl",
+      "type": "Random Forest Classifier",
+      "architecture": "100 estimators, max_depth=20",
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "auc": 1.0
+      }
+    },
+    "ensemble_classifier": {
+      "file": "ensemble_classifier.pkl",
+      "type": "Ensemble (Weighted Voting + Meta-Learner)",
+      "weights": {
+        "lstm": 0.0,
+        "anomaly": 0.5326585921970075,
+        "threat": 0.0,
+        "correlation": 0.4673414078029925
+      },
+      "metrics": {
+        "accuracy": 0.8501667778519013,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.5091128736083231
+      }
+    }
+  },
+  "configuration": {
+    "random_seed": 42,
+    "epochs": 50,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "anomaly_threshold": 0.95,
+    "threat_threshold": 0.7
+  },
+  "performance_summary": {
+    "best_model": "Ensemble",
+    "best_f1_score": 0.0,
+    "best_auc": 0.5091128736083231,
+    "all_model_f1_scores": {
+      "Behavioral LSTM": 0.0,
+      "Anomaly Detection": 0.8217677136596055,
+      "Threat Predictor": 0.0,
+      "Correlation Engine": 1.0,
+      "Ensemble": 0.0
+    }
+  },
+  "file_locations": {
+    "data_files": [
+      "data/raw_traffic.csv",
+      "data/labeled_dataset.csv",
+      "data/train_data.csv",
+      "data/validation_data.csv",
+      "data/test_data.csv",
+      "data/device_profiles.csv",
+      "data/threat_intelligence.csv"
+    ],
+    "model_files": [
+      "models/behavioral_lstm.h5",
+      "models/anomaly_autoencoder.h5",
+      "models/isolation_forest.pkl",
+      "models/threat_predictor.h5",
+      "models/policy_dqn.h5",
+      "models/correlation_engine.pkl",
+      "models/ensemble_classifier.pkl"
+    ],
+    "result_files": {
+      "confusion_matrices": [
+        "results\\confusion_matrices\\anomaly_detector_cm.png",
+        "results\\confusion_matrices\\behavioral_model_cm.png",
+        "results\\confusion_matrices\\ensemble_cm.png",
+        "results\\confusion_matrices\\threat_predictor_cm.png"
+      ],
+      "performance_metrics": [
+        "results\\performance_metrics\\f1_scores_comparison.png",
+        "results\\performance_metrics\\model_comparison.csv",
+        "results\\performance_metrics\\model_comparison.png",
+        "results\\performance_metrics\\roc_curves.png"
+      ],
+      "training_history": [
+        "results\\training_history\\autoencoder_training.png",
+        "results\\training_history\\dqn_rewards.png",
+        "results\\training_history\\lstm_loss_curves.png",
+        "results\\training_history\\threat_predictor_training.png"
+      ],
+      "feature_analysis": [
+        "results\\feature_analysis\\class_distribution.png",
+        "results\\feature_analysis\\correlation_heatmap.png",
+        "results\\feature_analysis\\feature_distributions.png",
+        "results\\feature_analysis\\feature_importance.png",
+        "results\\feature_analysis\\pca_visualization.png",
+        "results\\feature_analysis\\temporal_patterns.png",
+        "results\\feature_analysis\\tsne_clusters.png"
+      ],
+      "real_time_detection": [
+        "results\\real_time_detection\\anomaly_scores_dist.png",
+        "results\\real_time_detection\\detection_timeline.png",
+        "results\\real_time_detection\\false_positive_analysis.png",
+        "results\\real_time_detection\\threat_heatmap.png"
+      ],
+      "behavioral_patterns": [
+        "results\\behavioral_patterns\\normal_behavior_patterns.png"
+      ],
+      "final_report": [
+        "results\\final_report\\summary_dashboard.png"
+      ]
+    }
+  }
+}

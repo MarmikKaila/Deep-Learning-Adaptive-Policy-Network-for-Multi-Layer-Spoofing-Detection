@@ -1,0 +1,6 @@
+attack_type,packets_per_minute_mean,packets_per_minute_std,packets_per_minute_min,packets_per_minute_max,bytes_per_minute_mean,bytes_per_minute_std,ttl_mean,ttl_std,unique_destinations_1min_mean,unique_destinations_1min_max,connection_duration_mean,connection_duration_min,is_attack_count
+arp_spoofing,550.07,261.84,100.2,999.65,15440.04,7234.56,255.0,0.0,1.0,1,0.0,0.0,3000
+ddos,28014.24,13033.73,5080.25,49989.56,2723374.45,1323574.6,153.29,58.29,1.0,1,0.0,0.0,1500
+dns_spoofing,279.54,131.19,50.16,499.94,28039.97,13081.2,5.37,2.86,29.97,50,0.26,0.01,2250
+ip_spoofing,2761.85,1298.1,500.45,4998.35,274584.76,129327.59,15.31,8.54,124.9,200,0.51,0.01,4500
+mac_spoofing,1082.72,522.75,200.12,1998.88,109677.76,51579.01,95.76,18.83,60.4,100,5.07,0.1,3750
